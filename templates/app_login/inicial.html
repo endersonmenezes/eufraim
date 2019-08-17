@@ -1,1 +1,7 @@
-Estamos na página inicial do projeto! <3
+{% for dado in html %}
+    Cidade: {{ dado.0 }}<br>
+    CNPJ: {{ dado.3 }}<br>
+    Empresa: {{ dado.4 }}<br>
+    Componente: {{ dado.9 }}<br>
+    -------------- <br>
+{% endfor %}
