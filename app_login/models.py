@@ -13,8 +13,8 @@ class SimuladoEndereco(models.Model):
         return str(self.endereco_cep)
 
     class Meta:
-        verbose_name_plural = '6 - Endereços Cadastrados'
-        verbose_name = '6 - Endereços Cadastrados'
+        verbose_name_plural = '6 - SIMULADO - Endereços Cadastrados'
+        verbose_name = '6 - SIMULADO - Endereços Cadastrados'
 
 
 class SimuladoModalidade(models.Model):
@@ -24,8 +24,8 @@ class SimuladoModalidade(models.Model):
         return str(self.descricao)
 
     class Meta:
-        verbose_name_plural = '0 - Modalidades'
-        verbose_name = '0 - Modalidades'
+        verbose_name_plural = '0 - SIMULADO - Modalidades'
+        verbose_name = '0 - SIMULADO - Modalidades'
 
 
 class SimuladoComponente(models.Model):
@@ -48,8 +48,8 @@ class SimuladoFormacao(models.Model):
         return str(self.descricao)
 
     class Meta:
-        verbose_name_plural = '2 - Formação'
-        verbose_name = '2 - Formação'
+        verbose_name_plural = '2 - SIMULADO - Formação'
+        verbose_name = '2 - SIMULADO - Formação'
 
 
 class SimuladoResponsaveisTecnicos(models.Model):
@@ -60,8 +60,8 @@ class SimuladoResponsaveisTecnicos(models.Model):
         return str(self.nome)
 
     class Meta:
-        verbose_name_plural = '3 - Responsáveis Técnicos'
-        verbose_name = '3 - Responsáveis Técnicos'
+        verbose_name_plural = '3 - SIMULADO - Responsáveis Técnicos'
+        verbose_name = '3 - SIMULADO - Responsáveis Técnicos'
 
 
 class SimuladoEmpresaCrea(models.Model):
@@ -77,8 +77,8 @@ class SimuladoEmpresaCrea(models.Model):
         return str(self.cnpj)
 
     class Meta:
-        verbose_name_plural = '4 - Empresas Cadastradas'
-        verbose_name = '4 - Empresas Cadastradas'
+        verbose_name_plural = '4 - SIMULADO - Empresas Cadastradas'
+        verbose_name = '4 - SIMULADO - Empresas Cadastradas'
 
 
 class ObrasEmAndamento(models.Model):
@@ -93,5 +93,5 @@ class ObrasEmAndamento(models.Model):
         return str(self.executor) + ' - ' + str(self.fornecedor)
 
     class Meta:
-        verbose_name_plural = '5 - Obras em Andamento'
-        verbose_name = '5 - Obras em Andamento'
+        verbose_name_plural = '5 - SIMULADO - Obras em Andamento'
+        verbose_name = '5 - SIMULADO - Obras em Andamento'
