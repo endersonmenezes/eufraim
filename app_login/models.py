@@ -93,5 +93,5 @@ class ObrasEmAndamento(models.Model):
         return str(self.executor) + ' - ' + str(self.fornecedor)
 
     class Meta:
-        verbose_name_plural = '5 - SIMULADO - Obras em Andamento'
-        verbose_name = '5 - SIMULADO - Obras em Andamento'
+        verbose_name_plural = '5 - EXTRATOR - Obras em Andamento'
+        verbose_name = '5 - EXTRATOR - Obras em Andamento'
