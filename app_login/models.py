@@ -33,7 +33,7 @@ class SimuladoComponente(models.Model):
     origem_crea = models.ManyToManyField(SimuladoModalidade)
 
     def __str__(self):
-        return str(self.id) + ' - ' + str(self.nome)
+        return str(self.id) + ' - ' + str(self.origem_gov)
 
     class Meta:
         verbose_name_plural = '0 - Componentes'
