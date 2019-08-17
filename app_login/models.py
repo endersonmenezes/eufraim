@@ -13,7 +13,7 @@ class SimuladoEndereco(models.Model):
         return str(self.endereco_cep)
 
     class Meta:
-        verbose_name_plural = ' - SIMULADO - Endereços Cadastrados'
+        verbose_name_plural = '6 - SIMULADO - Endereços Cadastrados'
         verbose_name = '6 - SIMULADO - Endereços Cadastrados'
 
 
