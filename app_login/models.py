@@ -24,8 +24,8 @@ class SimuladoModalidade(models.Model):
         return str(self.descricao)
 
     class Meta:
-        verbose_name_plural = '0 - SIMULADO - Modalidades'
-        verbose_name = '0 - SIMULADO - Modalidades'
+        verbose_name_plural = '1 - SIMULADO - Modalidades'
+        verbose_name = '1 - SIMULADO - Modalidades'
 
 
 class SimuladoComponente(models.Model):
@@ -36,8 +36,8 @@ class SimuladoComponente(models.Model):
         return str(self.id) + ' - ' + str(self.nome)
 
     class Meta:
-        verbose_name_plural = '1 - Componentes'
-        verbose_name = '1 - Componentes'
+        verbose_name_plural = '0 - Componentes'
+        verbose_name = '0 - Componentes'
 
 
 class SimuladoFormacao(models.Model):
