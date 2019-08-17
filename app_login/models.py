@@ -3,95 +3,63 @@ from django.db import models
 # Create your models here.
 
 
-class SimuladoEndereco(models.Model):
-    endereco_descricao = models.CharField(max_length=255)
-    endereco_numero = models.PositiveIntegerField()
-    endereco_cep = models.IntegerField()
-    bairro = models.CharField(max_length=255)
-
-    def __str__(self):
-        return str(self.endereco_cep)
-
-    class Meta:
-        verbose_name_plural = '6 - SIMULADO - Endereços Cadastrados'
-        verbose_name = '6 - SIMULADO - Endereços Cadastrados'
-
-
-class SimuladoModalidade(models.Model):
-    descricao = models.CharField(max_length=255)
-
-    def __str__(self):
-        return str(self.descricao)
-
-    class Meta:
-        verbose_name_plural = '1 - SIMULADO - Modalidades'
-        verbose_name = '1 - SIMULADO - Modalidades'
-
-
-class SimuladoComponente(models.Model):
-    origem_gov = models.CharField(max_length=50)
-    origem_crea = models.ManyToManyField(SimuladoModalidade)
-
-    def __str__(self):
-        return str(self.id) + ' - ' + str(self.origem_gov)
-
-    class Meta:
-        verbose_name_plural = '0 - Componentes'
-        verbose_name = '0 - Componentes'
-
-
 class SimuladoFormacao(models.Model):
-    descricao = models.CharField(max_length=50)
-    componente_permissao = models.ManyToManyField(SimuladoComponente)
-
-    def __str__(self):
-        return str(self.descricao)
-
-    class Meta:
-        verbose_name_plural = '2 - SIMULADO - Formação'
-        verbose_name = '2 - SIMULADO - Formação'
-
-
-class SimuladoResponsaveisTecnicos(models.Model):
-    nome = models.CharField(max_length=255)
-    formacao = models.OneToOneField(SimuladoFormacao, on_delete=models.PROTECT)
+    nome = models.CharField(max_length=60, blank=True, null=True)
+    descricao = models.TextField()
 
     def __str__(self):
         return str(self.nome)
 
     class Meta:
-        verbose_name_plural = '3 - SIMULADO - Responsáveis Técnicos'
-        verbose_name = '3 - SIMULADO - Responsáveis Técnicos'
+        verbose_name_plural = '1 - Lista de Formações'
+        verbose_name = '1 - Lista de Formações'
 
 
-class SimuladoEmpresaCrea(models.Model):
-    cnpj = models.CharField(max_length=14, primary_key=True, )
+class SimuladoProfissionais(models.Model):
+    nome = models.CharField(max_length=60)
+    cpf = models.CharField(max_length=11)
+    titulos = models.ManyToManyField(SimuladoFormacao)
+
+    def __str__(self):
+        return str(self.nome)
+
+    class Meta:
+        verbose_name_plural = '2 - Lista de Profissionais'
+        verbose_name = '2 - Lista de Profissionais'
+
+
+class SimuladoFornecedor(models.Model):
     nome = models.CharField(max_length=255)
-    endereco = models.ForeignKey(SimuladoEndereco, on_delete=models.PROTECT)
-    endereco_numero = models.PositiveIntegerField()
-    endereco_complemento = models.CharField(max_length=50)
-    profissionais = models.ManyToManyField(SimuladoResponsaveisTecnicos)
-    situacao = models.BooleanField(default=True)
+    cnpj = models.CharField(primary_key=True, max_length=14)
+    profissionais = models.ManyToManyField(SimuladoProfissionais)
 
     def __str__(self):
-        return str(self.cnpj)
+        return str(self.nome)
 
     class Meta:
-        verbose_name_plural = '4 - SIMULADO - Empresas Cadastradas'
-        verbose_name = '4 - SIMULADO - Empresas Cadastradas'
+        verbose_name_plural = '3 - Lista de Fornecedores'
+        verbose_name = '3 - Lista de Fornecedores'
 
 
-class ObrasEmAndamento(models.Model):
-    executor = models.CharField(max_length=50)
-    fornecedor = models.ForeignKey(SimuladoEmpresaCrea, on_delete=models.PROTECT)
-    contrato_numero = models.CharField(max_length=50)
-    contrato_valor = models.FloatField()
-    componente = models.ForeignKey(SimuladoComponente, on_delete=models.PROTECT)
-    analisada = models.BooleanField(default=False)
+class Ocorrencia(models.Model):
+    STATUS_CHOICES = (
+        (0, 'Fila de Análise'),
+        (1, 'É uma ocorrencia'),
+        (2, 'Não é uma ocorrencia'),
+    )
+    fornecedor = models.ForeignKey(SimuladoFornecedor, on_delete=models.PROTECT)
+    contrato_numero = models.CharField(max_length=255)
+    contrato_projeto = models.IntegerField(null=True, blank=True)
+    contrato_lote = models.IntegerField(null=True, blank=True)
+    componente = models.CharField(max_length=60)
+    contrato_valor = models.FloatField(null=True, blank=True)
+    fotos = models.URLField(null=True, blank=True)
+    status = models.SmallIntegerField(choices=STATUS_CHOICES, default=0)
 
     def __str__(self):
-        return str(self.executor) + ' - ' + str(self.fornecedor)
+        return str(self.id)
 
     class Meta:
-        verbose_name_plural = '5 - EXTRATOR - Obras em Andamento'
-        verbose_name = '5 - EXTRATOR - Obras em Andamento'
+        verbose_name_plural = '4 - Lista de Ocorrências'
+        verbose_name = '4 - Lista de Ocorrências'
+        unique_together = ('fornecedor', 'contrato_numero', 'contrato_projeto', 'contrato_lote')
