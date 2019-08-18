@@ -1,7 +1,90 @@
-{% for dado in html %}
-    Cidade: {{ dado.0 }}<br>
-    CNPJ: {{ dado.3 }}<br>
-    Empresa: {{ dado.4 }}<br>
-    Componente: {{ dado.9 }}<br>
-    -------------- <br>
-{% endfor %}
+{% extends 'base.html' %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'includes/mensagem.html' %}
+
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'app_login:inicial' %}">EufraimBIT</a>
+        </li>
+        <li class="breadcrumb-item active">Página Inicial</li>
+    </ol>
+
+    <div class="container-fluid border-left-primary" style="margin-bottom: 30px; padding: 20px 20px 20px 20px;">
+        <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+        <div>
+      <b-card-group deck>
+          <b-card title="Title">
+              <b-card-text class="text-center">
+                  <h2>
+                    <b>123</b>
+                  </h2>
+              </b-card-text>
+          </b-card>
+          <b-card title="Title">
+              <b-card-text  class="text-center">
+                <h2>
+                  <b>123</b>
+                </h2>
+              </b-card-text>
+          </b-card>
+          <b-card title="Title">
+              <b-card-text  class="text-center">
+                <h2>
+                  <b>123</b>
+                </h2>
+              </b-card-text>
+          </b-card>
+          <b-card title="Title">
+              <b-card-text  class="text-center">
+                <h2>
+                  <b>123</b>
+                </h2>
+              </b-card-text>
+          </b-card>
+      </b-card-group>
+    </div>
+
+    </div>
+
+    <canvas class="line-chart"></canvas>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
+
+
+    <div class="container-fluid border-left-primary" style="margin-bottom: 30px; padding: 20px 20px 20px 20px;">
+        <h1 class="h3 mb-4 text-gray-800">Quem somos?</h1>
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus suscipit ante, eget tempor sapien pellentesque nec. Nunc volutpat, neque in molestie gravida, est neque porta neque, a suscipit erat magna et orci. Duis nibh est, luctus ac ornare quis, interdum non mauris. Donec ut pretium metus. Nulla facilisi. Vestibulum rutrum nibh id felis commodo condimentum. Proin magna tellus, auctor et purus id, egestas dignissim ex. Cras posuere porttitor felis id fringilla. Nulla molestie sollicitudin eros, id gravida nisi ultricies vitae. Curabitur vitae risus bibendum, tempus magna sit amet, volutpat massa. Donec bibendum pulvinar metus quis porta. Pellentesque varius imperdiet nibh, vel placerat mi condimentum non.
+
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+    Vue.http.headers.common['X-CSRFToken'] = "{{ csrf_token }}";
+    new Vue({
+        el: '#content-wrapper',
+        delimiters: ['${', '}'],
+        data: {
+
+        },
+        mounted: function () {
+          this.grafico();
+        },
+        methods: {
+          grafico: function() {
+            let ctx = document.getElementById('myChart');
+
+            }
+        },
+        computed: {
+
+        }
+      });
+    </script>
+{% endblock %}

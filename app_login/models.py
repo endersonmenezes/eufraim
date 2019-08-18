@@ -54,6 +54,7 @@ class Ocorrencia(models.Model):
     componente = models.CharField(max_length=60)
     contrato_valor = models.FloatField(null=True, blank=True)
     fotos = models.URLField(null=True, blank=True)
+    executor = models.CharField(max_length=50, null=True, blank=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=0)
 
     def __str__(self):

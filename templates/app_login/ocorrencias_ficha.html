@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+    {% include 'includes/mensagem.html' %}
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'app_login:inicial' %}">EufraimBIT</a>
+        </li>
+        <li class="breadcrumb-item active">Analisando Ocorrência de ID: {{ ocorrencia.id }}</li>
+    </ol>
+
+    <div class="container-fluid border-left-primary" style="margin-bottom: 30px; padding: 20px 20px 20px 20px;">
+        <h1 class="h3 mb-4 text-gray-800">Analisar Ocorrências</h1>
+    <div>
+        <b-card-group deck>
+            <b-card>
+                <b-card-text class="text-center">
+                    <p>
+                        ID da Ocorrência: ${ocorrencia.id} <br>
+                        Número do Contrato: ${ocorrencia.contrato_numero} <br>
+                        Projeto: ${ocorrencia.contrato_projeto} <br>
+                        Lote: ${ocorrencia.contrato_lote} <br>
+                        Componente: ${ocorrencia.componente} <br>
+                        Valor do Contrato: ${ocorrencia.contrato_valor} <br>
+                        Fotos: <a :href="ocorrencia.fotos">Clique aqui</a><br>
+                        Executor: ${ocorrencia.executor} <br>
+                        Status: <span class="text-danger">${ocorrencia.status}</span><br>
+                        Fornecedor: ${ocorrencia.fornecedor} <br>
+                        <span>
+                            Profissionais:<br>
+                            <span v-for="profissional in ocorrencia.profissionais">
+                                -----------<br>
+                                ${profissional.nome}<br>
+                                Titulos:
+                                <span v-for="titulo in profissional.titulo">
+                                    ${titulo}<br>
+                                </span>
+                                -----------<br>
+                            </span>
+                        </span><br>
+                        Contrato: <span class="text-success">Consultar Protal da Transparência [Ver Informações]</span>
+                    </p>
+                </b-card-text>
+            </b-card>
+      </b-card-group>
+        <b-card-group deck>
+            <b-card>
+                <b-card-text class="text-center">
+                    <b-button squared variant="danger">É uma ocorrência!</b-button>
+                    <b-button squared variant="success">Não é uma ocorrência!</b-button>
+                </b-card-text>
+            </b-card>
+      </b-card-group>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+    Vue.http.headers.common['X-CSRFToken'] = "{{ csrf_token }}";
+    new Vue({
+        el: '#content-wrapper',
+        delimiters: ['${', '}'],
+        data: {
+            ocorrencia: {'profissionais': {}},
+        },
+        mounted: function () {
+            this.getOcorrencias();
+        },
+        methods: {
+            getOcorrencias: function (url, tipo) {
+                let api_url = '{% url 'app_login:api_ocorrencias-list' %}{{ ocorrencia.id }}';
+                this.$http.get(api_url)
+                    .then((response) => {
+                        this.ocorrencia = response.data;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                },
+        },
+        computed: {
+
+        }
+      });
+    </script>
+{% endblock %}

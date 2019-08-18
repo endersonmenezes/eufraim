@@ -1,22 +1,63 @@
-from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
 from .models import Ocorrencia, SimuladoFornecedor
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.contrib import messages
 # Create your views here.
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
 def inicial(request):
+    return render(request, 'app_login/inicial.html')
+
+
+def ocorrencias(request):
+    if request.GET:
+        try:
+            id = int(request.GET['id'])
+        except:
+            messages.error(request, 'Não foi possível concluir sua solicitação, pois não encontramos '
+                                    'nenhuma ocorrencia!')
+            return render(request, 'app_login/ocorrencias_ficha.html', )
+        ocorrencia = Ocorrencia.objects.filter(id=int(request.GET['id']))
+        if not ocorrencia:
+            messages.error(request, 'Não foi possível concluir sua solicitação, pois não encontramos '
+                                    'nenhuma ocorrencia com esse ID!')
+            return render(request, 'app_login/ocorrencias_ficha.html', )
+        ocorrencia = Ocorrencia.objects.get(id=int(request.GET['id']))
+        ## TENTAR PEGAR CONTRATO
+        # if ocorrencia.executor == 'Apucarana':
+        #     dados = ocorrencia.contrato_numero.split('/')
+        #     url = 'http://portal.apucarana.pr.gov.br/pronimtb/index.asp?acao=1&item=1&visao=2&contrato='+\
+        #           str(dados[0])+'&anocontrato='+str(dados[1])+'&dsTipoContrato=Contrato'
+        #     page = requests.get(url)
+        #     soup = BeautifulSoup(page.text, 'html.parser')
+        #     conteudo = soup.find('div', {'id': 'conteudo'})
+        #     print(soup)
+        ## TENTAR PEGAR CONTRATO
+        return render(request, 'app_login/ocorrencias_ficha.html', {'ocorrencia': ocorrencia,})
+    return render(request, 'app_login/ocorrencias.html')
+
+
+def ativador_spiders(request):
     data = []
-    page = requests.get('http://200.195.150.93/dados_site_paranacidade/')
+    url = 'http://200.195.150.93/dados_site_paranacidade/'
+    page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
     table = soup.find('table', attrs={'class': 'table table-striped'})
     table_body = table.find('tbody')
     rows = table_body.find_all('tr')
-
     for row in rows:
         cols = row.find_all('td')
+        foto = row.find_all('a')
+        linkfoto = str(foto)
+        linkfoto = linkfoto.split('"')
         cols = [ele.text.strip() for ele in cols]
-        data.append([ele for ele in cols if ele])
+        array = [ele for ele in cols if ele]
+        array.append(url + linkfoto[1])
+        data.append(array)
 
     for licitacao in data:
         ocorrencia = Ocorrencia.objects.filter(fornecedor__cnpj=str(licitacao[3]),
@@ -32,6 +73,9 @@ def inicial(request):
             else:
                 empresa = SimuladoFornecedor.objects.get(cnpj=str(licitacao[3]))
             tmp_contrato_lote = int(licitacao[2])
+            tmp_executor = str(licitacao[0])
+            tmp_url = str(licitacao[-1])
+            tmp_url = tmp_url.replace('amp;', '')
             tmp_contrato_projeto = int(licitacao[1])
             tmp_contrato_numero = str(licitacao[6])
             tmp_contrato_valor = str(licitacao[8])
@@ -39,16 +83,16 @@ def inicial(request):
             tmp_contrato_valor = tmp_contrato_valor.replace(',', '.')
             tmp_contrato_valor = float(tmp_contrato_valor)
             tmp_componente = str(licitacao[9])
-            tmp_fotos_url = str(licitacao[10])
             ocorrencia = Ocorrencia.objects.create(
                 fornecedor=empresa,
+                executor=tmp_executor,
                 contrato_projeto=tmp_contrato_projeto,
                 contrato_lote=tmp_contrato_lote,
                 contrato_numero=tmp_contrato_numero,
                 componente=tmp_componente,
                 contrato_valor=tmp_contrato_valor,
-                fotos=tmp_fotos_url,
+                fotos=tmp_url,
             )
             ocorrencia.save()
 
-    return render(request, 'app_login/inicial.html', {'html': data})
+    return JsonResponse({'response': 200})

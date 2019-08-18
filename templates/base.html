@@ -9,15 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>UniCesumar - Atena - Governança, Riscos e Compliance</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/favicon.png' %}"/>
+    <title>EufraimBIT - Fiscalização</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
-    <link href="{% static 'css/nunito.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
+    {% include 'includes/vuecss.html' %}
+
     {% block header %}
     {% endblock %}
 </head>
@@ -25,71 +25,35 @@
 <body id="page-top">
 <!-- Page Wrapper -->
 <div id="wrapper">
-    {% if user.is_authenticated %}
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-university"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">ATENA</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'app_login:inicial' %}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Página Inicial</span></a>
-            </li>
-
-            {% if 2 in request.user|verificar_acessos or 3 in request.user|verificar_acessos or 4 in request.user|verificar_acessos %}
-            <li class="nav-item active">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRH"
-                   aria-expanded="false" aria-controls="collapseRH">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>RH</span>
-                </a>
-                <div id="collapseRH" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Aplicações</h6>
-                        <a class="collapse-item" href="{% url 'app_ocorrencia:inicial' %}">Ocorrências de Ponto</a>
-                        <div class="collapse-divider"></div>
-                    </div>
-                </div>
-            </li>
-            {% endif %}
-
-            {% if 5 in request.user|verificar_acessos or 6 in request.user|verificar_acessos %}
-            <li class="nav-item active">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGRC"
-                   aria-expanded="false" aria-controls="collapseRH">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>GRC</span>
-                </a>
-                <div id="collapseGRC" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Aplicações</h6>
-                        {% if 5 in request.user|verificar_acessos %}<a class="collapse-item" href="{% url 'app_ouvidoria:inicial' %}">Ouvidoria</a> {% endif %}
-                        {% if 6 in request.user|verificar_acessos %}<a class="collapse-item" href="{% url 'app_grc_rh:inicial' %}">RH</a> {% endif %}
-                        {% if 7 in request.user|verificar_acessos %}<a class="collapse-item" href="{% url 'app_grc_academico:inicial' %}">Acadêmico - AEP</a> {% endif %}
-                        <div class="collapse-divider"></div>
-                    </div>
-                </div>
-            </li>
-            {% endif %}
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="far fa-eye"></i>
             </div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'app_login:inicial' %}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Página Inicial</span>
+            </a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'app_login:ocorrencias' %}">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Análise de Ocorrências</span>
+            </a>
+        </li>
+
         </ul>
         <!-- End of Sidebar -->
-    {% endif %}
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -99,45 +63,31 @@
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 {% block topbar %}
                 {% endblock %}
-                {% if user.is_authenticated %}
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ request.user.first_name }}</span>
-                                <i class="fas fa-user"></i>
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{% url 'app_login:perfil' %}">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Perfil
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Sair
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                {% endif %}
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Nav Item - User Information -->
+                    <b-dropdown size="sm" text="Nome do Usuário" class="m-2" variant="primary">
+                        <b-dropdown-item-button>Perfil</b-dropdown-item-button>
+                        <b-dropdown-divider></b-dropdown-divider>
+                        <b-dropdown-item-button>Sair</b-dropdown-item-button>
+                    </b-dropdown>
+                </ul>
             </nav>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <div class="container-fluid" id="app">
 
                 <!-- Page Heading -->
                 {% block content %}
                 {% endblock %}
+
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -146,44 +96,12 @@
     <!-- End of Content Wrapper -->
 </div>
 <!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-{% if user.is_authenticated %}
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deseja realmente sair?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Clique em "Sair" para finalizar sua sessão no sistema!</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <a class="btn btn-primary" href="{% url 'app_login:sair' %}">Sair</a>
-            </div>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-<!-- Bootstrap core JavaScript-->
-<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+{% include 'includes/vuejs.html' %}
 {% block footer %}
 {% endblock %}
+
 
 </body>
 
