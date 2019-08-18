@@ -28,7 +28,12 @@
                         Valor do Contrato: ${ocorrencia.contrato_valor} <br>
                         Fotos: <a :href="ocorrencia.fotos">Clique aqui</a><br>
                         Executor: ${ocorrencia.executor} <br>
-                        Status: <span class="text-danger">${ocorrencia.status}</span><br>
+                        Status:
+                        <span class="text-danger">
+                        <span v-if="ocorrencia.status === 0">Em Análise</span>
+                        <span v-if="ocorrencia.status === 1">É uma ocorrência!</span>
+                        <span v-if="ocorrencia.status === 2">Não é uma ocorrência!</span>
+                        </span><br>
                         Fornecedor: ${ocorrencia.fornecedor} <br>
                         <span>
                             Profissionais:<br>
@@ -50,8 +55,8 @@
         <b-card-group deck>
             <b-card>
                 <b-card-text class="text-center">
-                    <b-button squared variant="danger">É uma ocorrência!</b-button>
-                    <b-button squared variant="success">Não é uma ocorrência!</b-button>
+                    <b-button squared variant="danger" @click="alterarStatus(1)">É uma ocorrência!</b-button>
+                    <b-button squared variant="success" @click="alterarStatus(2)">Não é uma ocorrência!</b-button>
                 </b-card-text>
             </b-card>
       </b-card-group>
@@ -75,6 +80,16 @@
             getOcorrencias: function (url, tipo) {
                 let api_url = '{% url 'app_login:api_ocorrencias-list' %}{{ ocorrencia.id }}';
                 this.$http.get(api_url)
+                    .then((response) => {
+                        this.ocorrencia = response.data;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                },
+            alterarStatus: function (status) {
+                let api_url = '{% url 'app_login:api_ocorrencias-list' %}{{ ocorrencia.id }}/';
+                this.$http.patch(api_url, {'status': status})
                     .then((response) => {
                         this.ocorrencia = response.data;
                     })

@@ -10,7 +10,12 @@ from selenium.webdriver.common.keys import Keys
 
 
 def inicial(request):
-    return render(request, 'app_login/inicial.html')
+    contadores = {
+        'total': Ocorrencia.objects.filter(status=0).count(),
+        'ocorrencia': Ocorrencia.objects.filter(status=1).count(),
+        'naoocorrencia': Ocorrencia.objects.filter(status=2).count()
+    }
+    return render(request, 'app_login/inicial.html', {'contadores': contadores})
 
 
 def ocorrencias(request):
@@ -38,7 +43,7 @@ def ocorrencias(request):
         #     print(soup)
         ## TENTAR PEGAR CONTRATO
         return render(request, 'app_login/ocorrencias_ficha.html', {'ocorrencia': ocorrencia,})
-    return render(request, 'app_login/ocorrencias.html')
+    return render(request, 'app_login/ocorrencias.html',)
 
 
 def ativador_spiders(request):

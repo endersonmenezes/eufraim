@@ -4,11 +4,11 @@ from .models import Ocorrencia
 
 class OcorrenciaSerializer(serializers.ModelSerializer):
 
-    status = serializers.SerializerMethodField()
-    profissionais = serializers.SerializerMethodField()
+    # status = serializers.SerializerMethodField(read_only=True)
+    profissionais = serializers.SerializerMethodField(read_only=True)
 
-    def get_status(self, obj):
-        return obj.get_status_display()
+    # def get_status(self, obj):
+    #     return obj.get_status_display()
 
     def get_profissionais(self, obj):
         data_array_tmp = []

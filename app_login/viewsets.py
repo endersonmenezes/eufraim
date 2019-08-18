@@ -14,7 +14,7 @@ class PaginationPagina20(pagination.PageNumberPagination):
 
 
 class OcorrenciaViewSet(viewsets.ModelViewSet):
-    queryset = Ocorrencia.objects.all().order_by('id')
+    queryset = Ocorrencia.objects.order_by('id')
     serializer_class = OcorrenciaSerializer
     pagination_class = PaginationPagina20
     filter_backends = (filters.SearchFilter, rfilters.DjangoFilterBackend,)
