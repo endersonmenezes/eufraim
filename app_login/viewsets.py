@@ -20,23 +20,23 @@ class OcorrenciaViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter, rfilters.DjangoFilterBackend,)
     search_fields = ('contrato_numero',)
 
-    def get_permissions(self):
-        """
-        Instantiates and returns the list of permissions that this view requires.
-        actions = list | create | retrieve | update | partial_update | destroy
-        """
-        if self.action == 'list':
-            permission_classes = [IsAdminUser]
-        elif self.action == 'create':
-            permission_classes = [IsAdminUser]
-        elif self.action == 'retrieve':
-            permission_classes = [IsAdminUser]
-        elif self.action == 'update':
-            permission_classes = [IsAdminUser]
-        elif self.action == 'partial_update':
-            permission_classes = [IsAdminUser]
-        elif self.action == 'destroy':
-            permission_classes = [IsAdminUser]
-        else:
-            permission_classes = [IsAdminUser]
-        return [permission() for permission in permission_classes]
+    # def get_permissions(self):
+    #     """
+    #     Instantiates and returns the list of permissions that this view requires.
+    #     actions = list | create | retrieve | update | partial_update | destroy
+    #     """
+    #     if self.action == 'list':
+    #         permission_classes = [IsAdminUser]
+    #     elif self.action == 'create':
+    #         permission_classes = [IsAdminUser]
+    #     elif self.action == 'retrieve':
+    #         permission_classes = [IsAdminUser]
+    #     elif self.action == 'update':
+    #         permission_classes = [IsAdminUser]
+    #     elif self.action == 'partial_update':
+    #         permission_classes = [IsAdminUser]
+    #     elif self.action == 'destroy':
+    #         permission_classes = [IsAdminUser]
+    #     else:
+    #         permission_classes = [IsAdminUser]
+    #     return [permission() for permission in permission_classes]
