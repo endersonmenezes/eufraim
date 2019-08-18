@@ -47,10 +47,11 @@
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRFToken'] = "{{ csrf_token }}";
     new Vue({
-        el: '#content-wrapper',
+        el: '#wrapper',
         delimiters: ['${', '}'],
         data: {
             loading: false,
+            isActive: true,
             ocorrencias: {},
             ocorrencias_fields: [
                     {key: 'id', label: 'ID'},
@@ -100,7 +101,21 @@
                     .catch((err) => {
                         console.log(err);
                     })
-            }
+            },
+            alternarPagina: function () {
+                console.log('teste');
+                this.isActive = !this.isActive;
+            },
+            classObject: function () {
+                let variant;
+                // Tipos de Mensagem
+                if (this.isActive) {
+                    variant = 'navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled'
+                } else {
+                    variant = 'navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
+                }
+                return variant;
+            },
         },
         computed: {
 

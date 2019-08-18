@@ -71,35 +71,34 @@
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRFToken'] = "{{ csrf_token }}";
     new Vue({
-        el: '#content-wrapper',
+        el: '#wrapper',
         delimiters: ['${', '}'],
         data: {
-
+            isActive: true,
         },
         mounted: function () {
           this.grafico();
           this.grafico_circulo();
         },
         methods: {
-          grafico_circulo: function(){
-            let myChart = echarts.init(document.getElementById('circulo'));
-            option = {
-            tooltip: {trigger: 'item',formatter: "{a} <br/>{b}: {c} ({d}%)"},
-            legend: {orient: 'vertical',x: 'left',data:['text-1','text-2','text-3','text-4','text-5']},
-            series: [{name:'Circulo',type:'pie',radius: ['50%', '70%'],avoidLabelOverlap: false,label: {normal: { show: false,position: 'center'},
-            emphasis: {show: true,textStyle: {fontSize: '30',fontWeight: 'bold'}}},
-            labelLine: {normal: {show: false}},
-            data:[
-                {value:335, name:'text-1'},
-                {value:310, name:'text-2'},
-                {value:234, name:'text-3'},
-                {value:135, name:'text-4'},
-                {value:1548, name:'text-5'}
-            ]}]};
-            myChart.setOption(option);
-           },
-
-                grafico: function() {
+            grafico_circulo: function(){
+                let myChart = echarts.init(document.getElementById('circulo'));
+                option = {
+                tooltip: {trigger: 'item',formatter: "{a} <br/>{b}: {c} ({d}%)"},
+                legend: {orient: 'vertical',x: 'left',data:['text-1','text-2','text-3','text-4','text-5']},
+                series: [{name:'Circulo',type:'pie',radius: ['50%', '70%'],avoidLabelOverlap: false,label: {normal: { show: false,position: 'center'},
+                emphasis: {show: true,textStyle: {fontSize: '30',fontWeight: 'bold'}}},
+                labelLine: {normal: {show: false}},
+                data:[
+                    {value:335, name:'text-1'},
+                    {value:310, name:'text-2'},
+                    {value:234, name:'text-3'},
+                    {value:135, name:'text-4'},
+                    {value:1548, name:'text-5'}
+                ]}]};
+                myChart.setOption(option);
+            },
+            grafico: function() {
             let myChart = echarts.init(document.getElementById('main'));
             let option = {
             // legend: {},
@@ -113,6 +112,20 @@
                 data: [20,30,40,50]
             }]};
             myChart.setOption(option);
+            },
+            alternarPagina: function () {
+                console.log('teste');
+                this.isActive = !this.isActive;
+            },
+            classObject: function () {
+                let variant;
+                // Tipos de Mensagem
+                if (this.isActive) {
+                    variant = 'navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled'
+                } else {
+                    variant = 'navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
+                }
+                return variant;
             },
 
         },
