@@ -22,5 +22,5 @@ Um agradecimento a toda equipe que participou do projeto, fomos contemplados com
 
 Você pode ver uma prévia funcional do projeto acessando [este site](https://www.facebook.com/mateus.gabrielmatos).
 
-O projeto usa como base uma versão editada do [SB Admin 2](https://startbootstrap.com/themes/sb-admin-2/) que eu possuo e utilizo em projetos até mesmo profissionalmente, [Django](https://www.djangoproject.com/) como Framework para desenvolvimento WEB, e o [heroku](https://dashboard.heroku.com/login) como PaaS onde conseguimos facilmente escalar nossa solução se um dia necessário.
+O projeto usa como base uma versão editada do [SB Admin 2](https://startbootstrap.com/themes/sb-admin-2/) que eu possuo e utilizo em projetos até mesmo profissionalmente junto com o [VueJS](https://vuejs.org/) |[BootstrapVueJS](https://bootstrap-vue.js.org/), [Django](https://www.djangoproject.com/) como Framework para desenvolvimento WEB, e o [Heroku](https://dashboard.heroku.com/login) como PaaS onde conseguimos facilmente escalar nossa solução se um dia necessário.
 
