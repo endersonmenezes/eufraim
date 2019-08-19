@@ -3,6 +3,8 @@
 Um agradecimento a toda equipe que participou do projeto, fomos contemplados com o Prêmio de **Primeiro Lugar** e minha felicidade maior como desenvolvedor é ver a região em que moramos, e nosso estado, dando valor a projetos de Scrapy, Engenharia de Dados... 
 
  :punch:
+ 
+ ![imagem da equipe](https://media.licdn.com/dms/image/C4D22AQHSq-A87B2WTw/feedshare-shrink_8192/0?e=1568851200&v=beta&t=oPUXqGdQ83W6mJRqcEbjd6e89hR-FpFfDuldPPQkKT4)
 
 ## Engenheiros Cívis
 
