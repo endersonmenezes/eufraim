@@ -1,5 +1,9 @@
 # Projeto para Hackathon da Inovação do CREA-PR [EufraimBIT]
 
+Um agradecimento a toda equipe que participou do projeto, fomos contemplados com o Prêmio de **Primeiro Lugar** e minha felicidade maior como desenvolvedor é ver a região em que moramos, e nosso estado, dando valor a projetos de Scrapy, Engenharia de Dados... 
+
+ :punch:
+
 ## Engenheiros Cívis
 
 - [Matheus Gabriel](https://www.facebook.com/mateus.gabrielmatos)
