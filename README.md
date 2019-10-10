@@ -4,7 +4,7 @@ Um agradecimento a toda equipe que participou do projeto, fomos contemplados com
 
  :punch:
  
- ![imagem da equipe](https://media.licdn.com/dms/image/C4D22AQHSq-A87B2WTw/feedshare-shrink_8192/0?e=1568851200&v=beta&t=oPUXqGdQ83W6mJRqcEbjd6e89hR-FpFfDuldPPQkKT4)
+ ![imagem da equipe](https://pasteboard.co/IBkfWRm.jpg)
 
 ## Engenheiros Cívis
 
@@ -22,7 +22,7 @@ Um agradecimento a toda equipe que participou do projeto, fomos contemplados com
 
 ## Descrição Básica do Projeto
 
-Você pode ver uma prévia funcional do projeto acessando [este site](https://www.facebook.com/mateus.gabrielmatos).
+Você pode ver uma prévia funcional do projeto acessando [este site](https://eufraim.herokuapp.com/).
 
-O projeto usa como base uma versão editada do [SB Admin 2](https://startbootstrap.com/themes/sb-admin-2/) que eu possuo e utilizo em projetos até mesmo profissionalmente junto com o [VueJS](https://vuejs.org/) |[BootstrapVueJS](https://bootstrap-vue.js.org/), [Django](https://www.djangoproject.com/) como Framework para desenvolvimento WEB, e o [Heroku](https://dashboard.heroku.com/login) como PaaS onde conseguimos facilmente escalar nossa solução se um dia necessário.
+O projeto usa como base uma versão editada do [SB Admin 2](https://startbootstrap.com/themes/sb-admin-2/) que eu possuo e utilizo em projetos até mesmo profissionalmente junto com o [VueJS](https://vuejs.org/) | [BootstrapVueJS](https://bootstrap-vue.js.org/), [Django](https://www.djangoproject.com/) como Framework para desenvolvimento WEB, e o [Heroku](https://dashboard.heroku.com/login) como PaaS onde conseguimos facilmente escalar nossa solução se um dia necessário.
 
